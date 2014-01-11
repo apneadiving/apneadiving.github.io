@@ -1,0 +1,12 @@
+.map {
+  height: 330px;
+  margin-top: 20px;
+}
+
+.map img {
+  max-width: none;
+}
+
+.map label {
+  width: auto; display:inline;
+}
