@@ -15,12 +15,8 @@ angular.module('App').directive('mapExample', function(){
 
       $scope.tabs = [
         {
-          "title": "Description",
-          "template": basePath + "/description.html"
-        },
-        {
-          "title": "Javascript",
-          "template": basePath + "/javascript.html"
+          "title": "Code",
+          "template": basePath + "/code.html"
         },
         {
           title: 'Map',
@@ -34,7 +30,7 @@ angular.module('App').directive('mapExample', function(){
       };
 
       $scope.$watch('tab.active', function(newValue){
-        if (newValue == 2 && !$scope.mapLoaded){
+        if (newValue == 1 && !$scope.mapLoaded){
           $scope.mapLoaded = true;
           builders[exampleName]()
         }
