@@ -2,6 +2,21 @@ hljs.initHighlightingOnLoad();
 
 angular.module('App', ['mgcrea.ngStrap'])
 
+angular.module('App').directive('hightlight', function(){
+  return {
+    link: function($scope, element, attrs){
+      element.find('pre code.js').each(function(index, code) {
+        var highlight = hljs.highlight('javascript', code.innerText).value;
+        code.innerHTML = highlight;
+      });
+      element.find('pre code.html').each(function(index, code) {
+        var highlight = hljs.highlight('html', code.innerText).value;
+        code.innerHTML = highlight;
+      });
+    }
+  };
+});
+
 angular.module('App').directive('mapExample', function(){
   return {
     scope: {
