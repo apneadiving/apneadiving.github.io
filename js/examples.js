@@ -8,7 +8,7 @@ angular.module('App').directive('mapExample', function(){
       mapExample: '@'
     },
     templateUrl: 'partials/map_example.html',
-    controller: [ '$scope' , 'App.MapBuiders', function($scope, builders){
+    controller: [ '$scope' , 'App.MapBuiders', '$timeout', function($scope, builders, $timeout){
 
       var exampleName = $scope.mapExample;
       var basePath = "partials/" + exampleName;
@@ -32,11 +32,9 @@ angular.module('App').directive('mapExample', function(){
       $scope.$watch('tab.active', function(newValue){
         if (newValue == 1 && !$scope.mapLoaded){
           $scope.mapLoaded = true;
-          builders[exampleName]()
+          $timeout(builders[exampleName], 100);
         }
       });
-
-
     }]
   }
 });
@@ -52,7 +50,7 @@ angular.module('App').service('App.MapBuiders', function(){
     one_marker: function(){
       var handler = Gmaps.build('Google');
       handler.buildMap({ internal: {id: 'one_marker'}}, function(){
-        markers = handler.addMarkers([
+        var markers = handler.addMarkers([
           {
             lat: 0,
             lng: 0,

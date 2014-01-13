@@ -1,6 +1,11 @@
+div[map-example] {
+  /*min-height:350px;*/
+}
+
 .map {
-  height: 330px;
-  margin-top: 20px;
+  height: 300px;
+  margin-top: 5px;
+  margin-bottom: 20px;
 }
 
 .map img {
@@ -8,5 +13,6 @@
 }
 
 .map label {
-  width: auto; display:inline;
+  width: auto;
+  display:inline;
 }
