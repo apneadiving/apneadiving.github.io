@@ -4,14 +4,12 @@ angular.module('App', ['mgcrea.ngStrap'])
 
 angular.module('App').directive('hightlight', function(){
   return {
+    restrict: 'A',
     link: function($scope, element, attrs){
-      element.find('pre code.js').each(function(index, code) {
-        var highlight = hljs.highlight('javascript', code.innerText).value;
-        code.innerHTML = highlight;
-      });
-      element.find('pre code.html').each(function(index, code) {
-        var highlight = hljs.highlight('html', code.innerText).value;
-        code.innerHTML = highlight;
+      element.find('pre code').each(function(index, code) {
+        $code = $(code);
+        var highlight = hljs.highlightAuto($code.text()).value;
+        $code.html(highlight);
       });
     }
   };
@@ -19,6 +17,7 @@ angular.module('App').directive('hightlight', function(){
 
 angular.module('App').directive('mapExample', function(){
   return {
+    restrict: 'A',
     scope: {
       mapExample: '@'
     },
