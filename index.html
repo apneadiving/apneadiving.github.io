@@ -37,14 +37,14 @@
               </a>
 
               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <li>1</li>
-                <li>2</li>
+                <li><a href="#basic-map" title="">Basic map</a></li>
+                <li><a href="#one-marker" title="">One marker</a></li>
               </ul>
             </div>
             <div class="badges">
               Put the badges here
             </div>
-          </div>          
+          </div>
 
           <div class="g4r-logo">
             <a href="/" title="">
@@ -64,22 +64,42 @@
     </header>
 
     <article>
-      <div class="container">
-        <section class="row">
-          <div class="col-lg-12">
-            <p class="lead">
-              Gmaps4rails is developed to simply create a Google Map with overlays (markers, infowindows...). Yet it's backed on a very flexible codebase which could be prone to accept other map providers.
-            </p>
-            <p>
-              Use it with any Ruby app (I guess you could simply take the js anywhere if you like).
-            </p>
+
+      <section>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <p class="lead">
+                Gmaps4rails is developed to simply create a Google Map with overlays (markers, infowindows...). Yet it's backed on a very flexible codebase which could be prone to accept other map providers.
+              </p>
+              <p>
+                Use it with any Ruby app (I guess you could simply take the js anywhere if you like).
+              </p>
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <div map-example='basic_map'></div>
-        <div map-example='one_marker'></div>
-
-      </div>
+      <section id="basic-map">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <h2>Basic map</h2>
+              <div class="example" map-example='basic_map'></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="one-marker">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <h2>One marker</h2>
+              <div class="example" map-example='one_marker'></div>
+            </div>
+          </div>
+        </div>
+      </section>
 
     </article>
 

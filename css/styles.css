@@ -56,21 +56,46 @@ body {
 article {
   padding: 20px 0;
   background: white; }
+  article > section {
+    padding: 15px 0;
+    border-bottom: 1px solid #cccccc; }
+    article > section:nth-child(2n) {
+      background: #fafafa; }
 
 p {
   font-size: 1.3em; }
 
+.tabs .nav-tabs > li {
+  float: right;
+  margin-right: 10px;
+  cursor: pointer;
+  font-weight: bold; }
+  .tabs .nav-tabs > li a {
+    margin: 0; }
+.tabs .tab-pane {
+  padding: 25px 0 10px;
+  border-style: solid;
+  border-color: #dddddd;
+  border-width: 0 1px 1px 1px;
+  background: white; }
+
+.example {
+  margin-top: -40px; }
+
 pre {
   white-space: initial;
-  background: whitesmoke;
+  background: #2d2d2d;
   padding: 0;
-  margin-top: 20px;
-  position: relative; }
-
-code, code.hljs {
-  background: transparent;
-  white-space: pre-wrap;
-  padding: 0 20px; }
+  position: relative;
+  margin: 0 -15px 25px; }
+  pre:last-child {
+    margin-bottom: 10px; }
+  pre code, pre code.hljs {
+    background: transparent;
+    white-space: pre-wrap;
+    padding: 10px 20px;
+    display: block;
+    color: #d3d0c8; }
 
 a, a:link, a:visited {
   color: firebrick; }
@@ -81,11 +106,12 @@ a:hover, a:active {
 
 .code-title {
   position: absolute;
-  background: white;
+  background: whitesmoke;
   padding: 3px 10px;
   border: 1px solid #cccccc;
   border-radius: 3px;
   font-weight: bold;
+  color: firebrick;
   min-width: 100px;
   text-align: center;
   top: -15px;
