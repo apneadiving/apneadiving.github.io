@@ -13,7 +13,7 @@ angular.module('App').directive('hightlight', function(){
   };
 });
 
-angular.module('App').directive('mapExample', function(){
+angular.module('App').directive('mapExample', [ 'App.MapBuilders', '$timeout', function(builders, $timeout){
   return {
     restrict: 'A',
     transclude: true,
@@ -21,7 +21,7 @@ angular.module('App').directive('mapExample', function(){
       mapExample: '@'
     },
     templateUrl: 'partials/map_example.html',
-    controller: [ '$scope' , 'App.MapBuilders', '$timeout', function($scope, builders, $timeout){
+    controller: [ '$scope' , function($scope){
 
       var exampleName = $scope.mapExample;
       var basePath = "partials/" + exampleName;
@@ -51,7 +51,7 @@ angular.module('App').directive('mapExample', function(){
       };
     }
   }
-});
+}]);
 
 angular.module('App').service('App.MapBuilders', function(){
 
