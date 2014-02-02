@@ -1,0 +1,51 @@
+@mixin marker($marker-width, $marker-color, $marker-font-color)
+  
+  color: $marker-font-color
+  text-align: center
+  display: inline-block
+  position: relative
+  background: $marker-color
+  width: $marker-width
+  height: $marker-width
+  border-radius: $marker-width/2
+  &:before 
+    content: ""
+    position: absolute
+    top: 0
+    left: 0
+    height: 0px
+    width: 0px
+    z-index: -1
+    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $marker-color
+    border-style: solid
+    border-width: $marker-width/2 0px $marker-width $marker-width/2
+    border-radius: $marker-width/2 0 0 $marker-width/3
+    transform-origin: 100% $marker-width/2
+    -ms-transform-origin: 100% $marker-width/2
+    -webkit-transform-origin: 100% $marker-width/2
+    -moz-transform-origin: 100% $marker-width/2
+    -webkit-transform: rotate(-26.565051deg)
+    -moz-transform: rotate(-26.565051deg)
+    -ms-transform: rotate(-26.565051deg)
+    transform: rotate(-26.565051deg)
+  &:after 
+    content: ""
+    position: absolute
+    top: 0
+    left: 50%
+    height: 0px
+    width: 0px
+    z-index: -1
+    border-color: $marker-color $marker-color rgba(0, 0, 0, 0) rgba(0, 0, 0, 0)
+    border-style: solid
+    border-width: $marker-width/2 $marker-width/2 $marker-width 0px
+    border-radius: 0px $marker-width/2 $marker-width/3 0px
+    transform-origin: 0 $marker-width/2
+    -ms-transform-origin: 0 $marker-width/2
+    -webkit-transform-origin: 0 $marker-width/2
+    -moz-transform-origin: 0 $marker-width/2
+    -webkit-transform: rotate(26.565051deg)
+    -moz-transform: rotate(26.565051deg)
+    -ms-transform: rotate(26.565051deg)
+    transform: rotate(26.565051deg)
+
