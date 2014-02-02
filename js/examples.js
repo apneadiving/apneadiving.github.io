@@ -42,6 +42,7 @@ angular.module('App').directive('mapExample', [ 'App.MapBuilders', '$timeout', f
           builders[exampleName]()
         }
         else{
+          //because bs-tabs may not have rendered so far...
           $timeout(buildMap, 100);
         }
       };
