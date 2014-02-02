@@ -21,8 +21,7 @@ angular.module('App').directive('mapExample', [ 'App.MapBuilders', '$timeout', f
       mapExample: '@'
     },
     templateUrl: 'partials/map_example.html',
-    controller: [ '$scope' , function($scope){
-
+    link: function($scope){
       var exampleName = $scope.mapExample;
       var basePath = "partials/" + exampleName;
 
@@ -36,8 +35,7 @@ angular.module('App').directive('mapExample', [ 'App.MapBuilders', '$timeout', f
           "template": basePath + "/map.html"
         }
       ];
-    }],
-    link: function($scope){
+
        $scope.$watch('tab.active', function(newValue){
         if (newValue == 1 && !$scope.mapLoaded){
           $scope.mapLoaded = true;
