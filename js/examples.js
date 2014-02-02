@@ -286,6 +286,14 @@ angular.module('App').service('App.MapBuilders', function(){
         handler.bounds.extendWith(circles);
         handler.fitMapToBounds();
       });
+    },
+    with_kml: function(){
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: {id: 'with_kml'}}, function(){
+        var kmls = handler.addKml(
+          { url: "http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml" }
+        );
+      });
     }
   };
 })
