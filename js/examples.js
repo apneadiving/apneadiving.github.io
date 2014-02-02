@@ -1,5 +1,3 @@
-hljs.initHighlightingOnLoad();
-
 angular.module('App', ['mgcrea.ngStrap'])
 
 angular.module('App').directive('hightlight', function(){
@@ -40,7 +38,7 @@ angular.module('App').directive('mapExample', function(){
       ];
 
       $scope.tab = {
-        active: 0,
+        active: 1,
         mapLoaded: false
       };
 
