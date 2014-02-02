@@ -29,7 +29,7 @@ angular.module('App').directive('mapExample', [ 'App.MapBuilders', '$timeout', f
       $scope.tabs = [
         {
           "title": "Code",
-          "template": basePath + "partials//code.html"
+          "template": basePath + "/code.html"
         },
         {
           title: 'Map',
