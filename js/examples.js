@@ -36,8 +36,9 @@ angular.module('App').directive('mapExample', function(){
           "template": basePath + "/map.html"
         }
       ];
-
-      $scope.$watch('tab.active', function(newValue){
+    }],
+    link: function($scope){
+       $scope.$watch('tab.active', function(newValue){
         if (newValue == 1 && !$scope.mapLoaded){
           $scope.mapLoaded = true;
           $timeout(builders[exampleName], 200);
@@ -48,7 +49,7 @@ angular.module('App').directive('mapExample', function(){
         active: 1,
         mapLoaded: false
       };
-    }]
+    }
   }
 });
 
