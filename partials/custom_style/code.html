@@ -2,22 +2,22 @@
   <pre>
     <span class="code-title">Javascript</span>
     <code class="js">
-      var mapStyle = [
-        //omitted for brevity but find nice one here: http://snazzymaps.com/
-      ];
+var mapStyle = [
+  //omitted for brevity but find nice one here: http://snazzymaps.com/
+];
 
-      var handler = Gmaps.build('Google');
-      handler.buildMap({
-          internal: {id: 'custom_style'},
-          provider: {
-            zoom:      15,
-            center:    new google.maps.LatLng(53.385873, -1.471471),
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            styles:    mapStyle
-          }
-        },
-        function(){ }
-      );
+var handler = Gmaps.build('Google');
+handler.buildMap({
+    internal: {id: 'custom_style'},
+    provider: {
+      zoom:      15,
+      center:    new google.maps.LatLng(53.385873, -1.471471),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles:    mapStyle
+    }
+  },
+  function(){ }
+);
     </code>
   </pre>
 
