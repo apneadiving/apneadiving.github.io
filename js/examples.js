@@ -37,17 +37,17 @@ angular.module('App').directive('mapExample', function(){
         }
       ];
 
+      $scope.$watch('tab.active', function(newValue){
+        if (newValue == 1 && !$scope.mapLoaded){
+          $scope.mapLoaded = true;
+          $timeout(builders[exampleName], 200);
+        }
+      });
+
       $scope.tab = {
         active: 1,
         mapLoaded: false
       };
-
-      $scope.$watch('tab.active', function(newValue){
-        if (newValue == 1 && !$scope.mapLoaded){
-          $scope.mapLoaded = true;
-          $timeout(builders[exampleName], 100);
-        }
-      });
     }]
   }
 });
