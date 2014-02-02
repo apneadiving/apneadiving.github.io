@@ -30,12 +30,12 @@ class CustomMarkerBuilder extends Gmaps.Google.Builders.Marker
 
 handler = Gmaps.build("Google", builders: { Marker: CustomMarkerBuilder } )
 handler.buildMap { internal: id: "custom_builder" }, ->
-  marker = handler.addMarker(
+  marker = handler.addMarker
     lat:               40.689167
     lng:               -74.044444
     custom_marker:     "&lt;img src='images/star.jpg' width='30' height='30'&gt; Statue of Liberty"
     custom_infowindow: "&lt;img src='images/statue.jpg' width='90' height='140'&gt; The Statue of Liberty is a colossal neoclassical sculpture on Liberty Island in the middle of New York"
-  )
+
   handler.map.centerOn marker
   handler.getMap().setZoom(15)
 
