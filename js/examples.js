@@ -18,6 +18,7 @@ angular.module('App').directive('hightlight', function(){
 angular.module('App').directive('mapExample', function(){
   return {
     restrict: 'A',
+    transclude: true,
     scope: {
       mapExample: '@'
     },
