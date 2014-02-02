@@ -1,3 +1,6 @@
+var __hasProp = {}.hasOwnProperty;
+var __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
 angular.module('App', ['mgcrea.ngStrap'])
 
 angular.module('App').directive('hightlight', function(){
@@ -293,6 +296,70 @@ angular.module('App').service('App.MapBuilders', function(){
         var kmls = handler.addKml(
           { url: "http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml" }
         );
+      });
+    },
+    custom_builder: function(){
+
+      CustomMarkerBuilder = (function(_super) {
+        __extends(CustomMarkerBuilder, _super);
+
+        function CustomMarkerBuilder() {
+          return CustomMarkerBuilder.__super__.constructor.apply(this, arguments);
+        }
+
+        CustomMarkerBuilder.prototype.create_marker = function() {
+          var options;
+          options = _.extend(this.marker_options(), this.rich_marker_options());
+          return this.serviceObject = new RichMarker(options);
+        };
+
+        CustomMarkerBuilder.prototype.rich_marker_options = function() {
+          var marker;
+          marker = document.createElement("div");
+          marker.setAttribute('class', 'custom_marker_content');
+          marker.innerHTML = this.args.custom_marker;
+          return {
+            content: marker
+          };
+        };
+
+        CustomMarkerBuilder.prototype.create_infowindow = function() {
+          var boxText;
+          if (!_.isString(this.args.custom_infowindow)) {
+            return null;
+          }
+          boxText = document.createElement("div");
+          boxText.setAttribute("class", 'custom_infowindow_content');
+          boxText.innerHTML = this.args.custom_infowindow;
+          return this.infowindow = new InfoBox(this.infobox(boxText));
+        };
+
+        CustomMarkerBuilder.prototype.infobox = function(boxText) {
+          return {
+            content: boxText,
+            pixelOffset: new google.maps.Size(-140, 0),
+            boxStyle: {
+              width: "280px"
+            }
+          };
+        };
+
+        return CustomMarkerBuilder;
+
+      })(Gmaps.Google.Builders.Marker);
+
+      var handler = Gmaps.build('Google', { builders: { Marker: CustomMarkerBuilder } })
+      handler.buildMap({ internal: {id: 'custom_builder'}}, function(){
+        var marker = handler.addMarker(
+          {
+            lat:  40.689167,
+            lng: -74.044444,
+            custom_marker:     "<img src='images/star.jpg' width='30' height='30'> Statue of Liberty",
+            custom_infowindow: "<img src='images/statue.jpg' width='90' height='140'> The Statue of Liberty is a colossal neoclassical sculpture on Liberty Island in the middle of New York"
+          }
+        );
+        handler.map.centerOn(marker);
+        handler.getMap().setZoom(15);
       });
     }
   };

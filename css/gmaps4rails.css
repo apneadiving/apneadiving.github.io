@@ -16,3 +16,13 @@ div[map-example] {
   width: auto;
   display:inline;
 }
+
+
+.custom_marker_content{
+  background: white;
+  width: 150px;
+}
+
+.custom_infowindow_content{
+  background: white;
+}

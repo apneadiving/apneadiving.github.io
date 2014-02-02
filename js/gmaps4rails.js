@@ -94,12 +94,12 @@
 }).call(this);
 (function() {
   this.Gmaps.Objects.Builders = function(builderClass, objectClass, primitivesProvider) {
-    objectClass.PRIMITIVES = primitivesProvider;
-    builderClass.OBJECT = objectClass;
-    builderClass.PRIMITIVES = primitivesProvider;
     return {
       build: function(args, provider_options, internal_options) {
         var builder;
+        objectClass.PRIMITIVES = primitivesProvider;
+        builderClass.OBJECT = objectClass;
+        builderClass.PRIMITIVES = primitivesProvider;
         builder = new builderClass(args, provider_options, internal_options);
         return builder.build();
       }
@@ -116,6 +116,7 @@
       }
       this.setPrimitives(options);
       this.setOptions(options);
+      this._cacheAllBuilders();
       this.resetBounds();
     }
 
@@ -234,6 +235,14 @@
       return resource;
     };
 
+    Handler.prototype._cacheAllBuilders = function() {
+      var that;
+      that = this;
+      return _.each(['Bound', 'Circle', 'Clusterer', 'Kml', 'Map', 'Marker', 'Polygon', 'Polyline'], function(kind) {
+        return that._builder(kind);
+      });
+    };
+
     Handler.prototype._clusterize = function() {
       return _.isObject(this.marker_options.clusterer);
     };
@@ -247,7 +256,7 @@
     Handler.prototype._default_marker_options = function() {
       return {
         singleInfowindow: true,
-        maxRandomDistance: 100,
+        maxRandomDistance: 0,
         clusterer: {
           maxZoom: 5,
           gridSize: 50
@@ -957,7 +966,11 @@
           if (_.isNumber(position.lat) && _.isNumber(position.lng)) {
             return new factory.latLng(position.lat, position.lng);
           } else {
-            return position;
+            if (_.isFunction(position.getServiceObject)) {
+              return position.getServiceObject().getPosition();
+            } else {
+              return position;
+            }
           }
         }
       }
