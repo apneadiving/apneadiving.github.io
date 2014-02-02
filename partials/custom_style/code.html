@@ -1,0 +1,32 @@
+<div hightlight=''>
+  <pre>
+    <span class="code-title">Javascript</span>
+    <code class="js">
+      var mapStyle = [
+        //omitted for brevity but find nice one here: http://snazzymaps.com/
+      ];
+
+      var handler = Gmaps.build('Google');
+      handler.buildMap({
+          internal: {id: 'custom_style'},
+          provider: {
+            zoom:     15,
+            center:    new google.maps.LatLng(53.385873, -1.471471),
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles:    mapStyle
+          }
+        },
+        function(){ }
+      );
+    </code>
+  </pre>
+
+  <pre>
+    <span class="code-title">HTML</span>
+    <code class="html">
+  &lt;div style='width: 800px;'&gt;
+    &lt;div id="custom_style" style='width: 800px; height: 400px;'&gt;&lt;/div&gt;
+  &lt;/div&gt;
+    </code>
+  </pre>
+</div>
