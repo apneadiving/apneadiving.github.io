@@ -21,7 +21,8 @@ angular.module('App').directive('mapExample', [ 'App.MapBuilders', '$timeout', f
       mapExample: '@'
     },
     templateUrl: 'partials/map_example.html',
-    link: function($scope){
+    link: function($scope, element){
+      var mapLoaded = false;
       var exampleName = $scope.mapExample;
       var basePath = "partials/" + exampleName;
 
@@ -36,16 +37,28 @@ angular.module('App').directive('mapExample', [ 'App.MapBuilders', '$timeout', f
         }
       ];
 
+      var buildMap = function(){
+        if(isMapDomReady()){
+          builders[exampleName]()
+        }
+        else{
+          $timeout(buildMap, 100);
+        }
+      };
+
+      var isMapDomReady = function(){
+        return (element.find('div.map').length > 0);
+      };
+
        $scope.$watch('tab.active', function(newValue){
-        if (newValue == 1 && !$scope.mapLoaded){
-          $scope.mapLoaded = true;
-          $timeout(builders[exampleName], 200);
+        if (newValue == 1 && !mapLoaded){
+          mapLoaded = true;
+          buildMap();
         }
       });
 
       $scope.tab = {
-        active: 1,
-        mapLoaded: false
+        active: 1
       };
     }
   }
@@ -58,7 +71,6 @@ angular.module('App').service('App.MapBuilders', function(){
       var handler = Gmaps.build('Google');
       handler.buildMap({ internal: {id: 'basic_map' }});
     },
-
     one_marker: function(){
       var handler = Gmaps.build('Google');
       handler.buildMap({ internal: {id: 'one_marker'}}, function(){
@@ -222,7 +234,6 @@ angular.module('App').service('App.MapBuilders', function(){
         },
         function(){ }
       );
-
     },
     multi_markers: function(){
       var handler = Gmaps.build('Google');
@@ -237,7 +248,6 @@ angular.module('App').service('App.MapBuilders', function(){
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
       });
-    },
-
+    }
   };
 })
