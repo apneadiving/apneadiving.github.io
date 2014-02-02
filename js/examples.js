@@ -249,6 +249,43 @@ angular.module('App').service('App.MapBuilders', function(){
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
       });
+    },
+    multi_overlays: function(){
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: {id: 'multi_overlays'}}, function(){
+
+
+        var circles = handler.addCircles(
+          [{ lat: 51, lng: -6, radius: 50000 }],
+          { strokeColor: '#FF0000'}
+        );
+
+        var polylines = handler.addPolylines(
+          [
+            [
+              {lat: 42, lng: -6},
+              {lat: 50, lng: -6}
+            ]
+          ],
+          { strokeColor: '#FF0000'}
+        );
+
+        var polygons = handler.addPolygons(
+          [
+            [
+              {lat:  48, lng: -3.5}, { lat: 51, lng: -0.5},
+              {lat:  48, lng:  2.5}, { lat: 51, lng:  5.5},
+              {lat:  48, lng:  8.5}, { lat: 42, lng:  2.5},
+            ]
+          ],
+          { strokeColor: '#FF0000'}
+        );
+
+        handler.bounds.extendWith(polylines);
+        handler.bounds.extendWith(polygons);
+        handler.bounds.extendWith(circles);
+        handler.fitMapToBounds();
+      });
     }
   };
 })
