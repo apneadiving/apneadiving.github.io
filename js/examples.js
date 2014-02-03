@@ -1,7 +1,7 @@
 var __hasProp = {}.hasOwnProperty;
 var __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-angular.module('App', ['mgcrea.ngStrap'])
+angular.module('App', ['mgcrea.ngStrap']);
 
 angular.module('App').directive('hightlight', function(){
   return {
@@ -21,13 +21,16 @@ angular.module('App').directive('mapExample', [ 'App.MapBuilders', '$timeout', f
     restrict: 'A',
     transclude: true,
     scope: {
-      mapExample: '@'
+      mapExample:  '@',
+      customHtml:  '@'
     },
     templateUrl: 'partials/map_example.html',
     link: function($scope, element){
       var mapLoaded = false;
       var exampleName = $scope.mapExample;
       var basePath = "partials/" + exampleName;
+
+      var map_template = $scope.customHtml ? (basePath + "/map.html") : "partials/map.html"
 
       $scope.tabs = [
         {
@@ -36,7 +39,7 @@ angular.module('App').directive('mapExample', [ 'App.MapBuilders', '$timeout', f
         },
         {
           title: 'Map',
-          "template": "partials/map.html"
+          "template": map_template
         }
       ];
 
@@ -360,6 +363,45 @@ angular.module('App').service('App.MapBuilders', function(){
         );
         handler.map.centerOn(marker);
         handler.getMap().setZoom(15);
+      });
+    },
+    sidebar_builder: function(){
+      function createSidebarLi(json){
+        return ("<li><a>" + json.name + "<\/a><\/li>");
+      };
+
+      function bindLiToMarker($li, marker){
+        $li.on('click', function(){
+          marker.panTo();
+          google.maps.event.trigger(marker.getServiceObject(), 'click');
+        })
+      };
+
+      function createSidebar(json_array){
+        _.each(json_array, function(json){
+          var $li = $( createSidebarLi(json) );
+          $li.appendTo('#sidebar_container');
+          bindLiToMarker($li, json.marker);
+        });
+      };
+
+      handler = Gmaps.build('Google');
+      handler.buildMap({ internal: {id: 'sidebar_builder'}}, function(){
+        var json_array = [
+          { lat: 40, lng: -80, name: 'Foo', infowindow: "I'm Foo" },
+          { lat: 45, lng: -90, name: 'Bar', infowindow: "I'm Bar" },
+          { lat: 50, lng: -85, name: 'Baz', infowindow: "I'm Baz" }
+        ];
+
+        var markers = handler.addMarkers(json_array);
+
+        _.each(json_array, function(json, index){
+          json.marker = markers[index];
+        });
+
+        createSidebar(json_array);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
       });
     }
   };
