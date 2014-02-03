@@ -3,26 +3,25 @@ var __extends = function(child, parent) { for (var key in parent) { if (__hasPro
 
 angular.module('App', ['mgcrea.ngStrap']);
 
-angular.module('App').run(function($window, $rootScope, $location, $anchorScroll) {
-
-  var targetElement = angular.element($window.document.body);
-  targetElement.on('click', function(evt) {
-    var el = angular.element(evt.target);
-    var hash = el.attr('href');
-    if(!hash || hash[0] !== '#') return;
-    if(hash.length > 1 && hash[1] === '/') return;
-    if(evt.which !== 1) return;
-    evt.preventDefault();
-    $location.hash(hash.substr(1));
-    $anchorScroll();
-    $rootScope.$digest();
-  });
-
-  // Initial $anchorScroll()
-  setTimeout(function() {
-    $anchorScroll();
-  }, 0);
-
+angular.module('App').directive('anchorList', function($rootScope, $location, $anchorScroll) {
+  return {
+    link: function(scope, element){
+      element.on('click', function(evt) {
+        var el = angular.element(evt.target);
+        var hash = el.attr('href');
+        if(!hash || hash[0] !== '#') return;
+        if(hash.length > 1 && hash[1] === '/') return;
+        if(evt.which !== 1) return;
+        evt.preventDefault();
+        $location.hash(hash.substr(1));
+        $anchorScroll();
+      });
+      // Initial $anchorScroll()
+      setTimeout(function() {
+        $anchorScroll();
+      }, 400);
+    }
+  }
 });
 
 angular.module('App').directive('hightlight', function(){
