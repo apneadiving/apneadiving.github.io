@@ -393,6 +393,8 @@ angular.module('App').service('App.MapBuilders', function(){
 
       function bindLiToMarker($li, marker){
         $li.on('click', function(){
+          handler.getMap().setZoom(14);
+          marker.setMap(handler.getMap());
           marker.panTo();
           google.maps.event.trigger(marker.getServiceObject(), 'click');
         })

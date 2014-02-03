@@ -9,6 +9,8 @@ function createSidebarLi(json){
 
 function bindLiToMarker($li, marker){
   $li.on('click', function(){
+    handler.getMap().setZoom(14);
+    marker.setMap(handler.getMap()); //because clusterer removes map property from marker
     marker.panTo();
     google.maps.event.trigger(marker.getServiceObject(), 'click');
   })
