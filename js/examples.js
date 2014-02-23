@@ -66,7 +66,7 @@ angular.module('App').directive('mapExample', [ 'App.MapBuilders', '$timeout', f
 
       var buildMap = function(){
         if(isMapDomReady()){
-          builders[exampleName]()
+          builders[exampleName]();
         }
         else{
           //because bs-tabs may not have rendered so far...
@@ -425,6 +425,47 @@ angular.module('App').service('App.MapBuilders', function(){
         createSidebar(json_array);
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
+      });
+    },
+    geolocation: function(){
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: {id: 'geolocation'} }, function(){
+        if(navigator.geolocation)
+          navigator.geolocation.getCurrentPosition(displayOnMap);
+      });
+
+      function displayOnMap(position){
+        var marker = handler.addMarker({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+        handler.map.centerOn(marker);
+      };
+    },
+    directions: function(){
+      var directionsDisplay = new google.maps.DirectionsRenderer();
+      var directionsService = new google.maps.DirectionsService();
+
+      function calcRoute() {
+        var origin      = new google.maps.LatLng(41.850033, -87.6500523);
+        var destination = new google.maps.LatLng(42.850033, -85.6500523);
+        var request = {
+            origin:      origin,
+            destination: destination,
+            travelMode:  google.maps.TravelMode.DRIVING
+        };
+        directionsService.route(request, function(response, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+          }
+        });
+      }
+
+      calcRoute();
+
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: {id: 'directions'}}, function(){
+        directionsDisplay.setMap(handler.getMap());
       });
     }
   };

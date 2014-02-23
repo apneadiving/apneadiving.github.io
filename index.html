@@ -39,12 +39,14 @@
               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" anchor-list>
                 <li><a href="#basic-map" title="">Basic map</a></li>
                 <li><a href="#one-marker" title="">One marker</a></li>
+                <li><a href="#geo-location" title="">Geolocation</a></li>
                 <li><a href="#multi-markers" title="">Multiple Markers</a></li>
                 <li><a href="#sidebar-builder" title="">Sidebar</a></li>
                 <li><a href="#multi-overlays" title="">Multiple Overlays</a></li>
                 <li><a href="#custom-style" title="">Custom Style</a></li>
                 <li><a href="#custom-builder" title="">Custom Builder</a></li>
                 <li><a href="#with-kml" title="">Kml</a></li>
+                <li><a href="#with-directions" title="">Directions</a></li>
               </ul>
             </div>
             <div class="badges">
@@ -59,9 +61,6 @@
               </a>
               <a href="http://coderwall.com/apneadiving">
                 <img src="https://github-camo.global.ssl.fastly.net/1abfb69eb222a0e86773f1f3bb5dd175bd4f6ddb/687474703a2f2f6170692e636f64657277616c6c2e636f6d2f61706e6561646976696e672f656e646f727365636f756e742e706e67" alt="Endorse" style="max-width:100%;">
-              </a>
-              <a href="https://bitdeli.com/free">
-                <img src="https://d2weczhvl823v0.cloudfront.net/apneadiving/google-maps-for-rails/trend.png" alt="Bitdeli Badge" style="max-width:100%;">
               </a>
             </div>
           </div>
@@ -108,6 +107,10 @@
         One marker
       </section>
 
+      <section id="geo_location" map-example='geolocation'>
+        Geolocation
+      </section>
+
       <section id="multi-markers" map-example='multi_markers'>
         Multiple Markers + auto-adjust + clustering
       </section>
@@ -132,6 +135,10 @@
         Kml
       </section>
 
+      <section id="with-directions" map-example='directions'>
+        Directions
+      </section>
+
     </article>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -144,7 +151,7 @@
     <script src='http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js' type='text/javascript'></script>
 
     <script src="js/modernizr.custom.55818.js" type="text/javascript" charset="utf-8"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4/highlight.min.js" type="text/javascript"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js" type="text/javascript"></script>
