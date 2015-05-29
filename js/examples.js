@@ -107,7 +107,7 @@ angular.module('App').service('App.MapBuilders', function(){
             lat: 0,
             lng: 0,
             picture: {
-              url: "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
+              url: "images/star.jpg",
               width:  36,
               height: 36
             },
